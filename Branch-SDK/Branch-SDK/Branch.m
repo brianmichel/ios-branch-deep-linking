@@ -415,24 +415,27 @@ NSString * const BNCShareCompletedEvent = @"Share Completed";
 - (BOOL)continueUserActivity:(NSUserActivity *)userActivity {
     //check to see if a browser activity needs to be handled
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+
         self.preferenceHelper.universalLinkUrl = [userActivity.webpageURL absoluteString];
         self.preferenceHelper.shouldWaitForInit = NO;
         [self initUserSessionAndCallCallback:YES];
         
         id branchUniversalLinkDomains = [self.preferenceHelper getBranchUniversalLinkDomains];
-        if ([branchUniversalLinkDomains isKindOfClass:[NSString class]] && [[userActivity.webpageURL absoluteString] containsString:branchUniversalLinkDomains]) {
+        if ([branchUniversalLinkDomains isKindOfClass:[NSString class]] &&
+            [[userActivity.webpageURL absoluteString] containsString:branchUniversalLinkDomains]) {
             return YES;
         }
         else if ([branchUniversalLinkDomains isKindOfClass:[NSArray class]]) {
             for (id oneDomain in branchUniversalLinkDomains) {
-                if ([oneDomain isKindOfClass:[NSString class]] && [[userActivity.webpageURL absoluteString] containsString:oneDomain]) {
+                if ([oneDomain isKindOfClass:[NSString class]] &&
+                    [[userActivity.webpageURL absoluteString] containsString:oneDomain]) {
                     return YES;
                 }
             }
         }
         
         NSString *userActivityURL = [userActivity.webpageURL absoluteString];
-        NSArray *branchDomains = [NSArray arrayWithObjects:@"bnc.lt", @"app.link", @"test-app.link", nil];
+        NSArray *branchDomains = @[ @"bnc.lt", @"app.link", @"test-app.link", @"beta.branch.io" ];
         for (NSString* domain in branchDomains) {
             if ([userActivityURL containsString:domain])
                 return YES;

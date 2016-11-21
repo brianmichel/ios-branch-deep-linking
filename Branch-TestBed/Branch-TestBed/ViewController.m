@@ -58,11 +58,16 @@ NSString *type = @"some type";
     _branchUniversalObject.price = 1000;
     _branchUniversalObject.currency = @"$";
     _branchUniversalObject.type = type;
-    [_branchUniversalObject addMetadataKey:@"deeplink_text" value:[NSString stringWithFormat:
-                                                                   @"This text was embedded as data in a Branch link with the following characteristics:\n\n  canonicalUrl: %@\n  title: %@\n  contentDescription: %@\n  imageUrl: %@\n", canonicalUrl, contentTitle, contentDescription, imageUrl]];
+    [_branchUniversalObject addMetadataKey:@"deeplink_text"
+        value:[NSString stringWithFormat:
+           @"This text was embedded as data in a Branch link with the following characteristics:\n\n  canonicalUrl: %@\n  title: %@\n  contentDescription: %@\n  imageUrl: %@\n", canonicalUrl, contentTitle, contentDescription, imageUrl]];
     [self refreshRewardPoints];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.branchLinkTextField becomeFirstResponder];
+}
 
 - (IBAction)createBranchLinkButtonTouchUpInside:(id)sender {
     BranchLinkProperties *linkProperties = [[BranchLinkProperties alloc] init];

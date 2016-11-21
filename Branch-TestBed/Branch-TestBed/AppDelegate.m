@@ -25,7 +25,7 @@
      */
 
     Branch *branch = [Branch getInstance];
-    [branch setDebug];
+    //[branch setDebug];    eDebug.
     
     // For Apple Search Ads
     // [branch delayInitToCheckForSearchAds];
