@@ -171,23 +171,7 @@ NSInteger const ABOUT_30_DAYS_TIME_IN_SECONDS = 60 * 60 * 24 * 30;
             selector:@selector(keyWindowNotification:)
             name:UIWindowDidBecomeKeyNotification object:nil];
 
-        self.primaryWindow = [[UIApplication sharedApplication] keyWindow];
-
-        self.safController =
-            [[BNCSViewController alloc] initWithURL:strongMatchUrl];
-        self.safController.delegate = (id) self;
-        self.safController.view.frame = self.primaryWindow.bounds;
-
-        [self.primaryWindow.rootViewController addChildViewController:self.safController];
-        [self.primaryWindow insertSubview:self.safController.view atIndex:0];
-        [self.safController didMoveToParentViewController:self.primaryWindow.rootViewController];
-
-//        self.secondWindow = [[BNCWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//        self.secondWindow.rootViewController = safController;
-//        self.secondWindow.windowLevel = UIWindowLevelNormal - 100;
-//        self.secondWindow.hidden = NO;
-//        self.secondWindow.primaryWindow = self.primaryWindow;
-//        [self.secondWindow makeKeyWindow];
+        [self loadViewControllerWithURL:strongMatchUrl];
 
         // Give enough time for Safari to load the request (optimized for 3G)
         dispatch_after(
@@ -199,7 +183,7 @@ NSInteger const ABOUT_30_DAYS_TIME_IN_SECONDS = 60 * 60 * 24 * 30;
                 // applications using view controller based status bar appearance are restored.
 
                 NSLog(@"Timer dispatch: Removing saf.");
-                [self unloadSaf];
+                [self unloadViewController];
                 [BNCPreferenceHelper preferenceHelper].lastStrongMatchDate = [NSDate date];
                 self.requestInProgress = NO;
             }
@@ -207,8 +191,23 @@ NSInteger const ABOUT_30_DAYS_TIME_IN_SECONDS = 60 * 60 * 24 * 30;
     });
 }
 
-- (void) unloadSaf {
-    NSLog(@"unloadSaf");
+- (void) loadViewControllerWithURL:(NSURL*)matchURL {
+    if (self.primaryWindow) return;
+
+    self.primaryWindow = [[UIApplication sharedApplication] keyWindow];
+
+    self.safController =
+        [[BNCSViewController alloc] initWithURL:matchURL];
+    self.safController.delegate = (id) self;
+    self.safController.view.frame = self.primaryWindow.bounds;
+
+    [self.primaryWindow.rootViewController addChildViewController:self.safController];
+    [self.primaryWindow insertSubview:self.safController.view atIndex:0];
+    [self.safController didMoveToParentViewController:self.primaryWindow.rootViewController];
+}
+
+- (void) unloadViewController {
+    NSLog(@"unloadViewController");
     [self.safController willMoveToParentViewController:nil];
     [self.safController.view removeFromSuperview];
     [self.safController removeFromParentViewController];
@@ -221,7 +220,7 @@ NSInteger const ABOUT_30_DAYS_TIME_IN_SECONDS = 60 * 60 * 24 * 30;
 - (void)safariViewController:(SFSafariViewController *)controller
       didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
     NSLog(@"Safari Did load.");
-    [self unloadSaf];
+    [self unloadViewController];
 }
 
 - (void) keyWindowNotification:(NSNotification*)notification {

@@ -28,11 +28,23 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>branchtest</string>
+                <string>fb1075393815892233</string>
 			</array>
 		</dict>
 	</array>
+    <key>FacebookAppID</key>
+    <string>1075393815892233</string>
+    <key>FacebookDisplayName</key>
+    <string>Branch Testbed</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>fbapi</string>
+      <string>fb-messenger-api</string>
+      <string>fbauth2</string>
+      <string>fbshareextension</string>
+    </array>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>

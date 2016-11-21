@@ -447,6 +447,13 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ekc-rb-YQC" id="By0-RI-7TX">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPf-4A-Jiz" customClass="FBSDKLoginButton">
+                                                    <rect key="frame" x="96" y="0.0" width="188" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Facebook Login"/>
+                                                </button>
+                                            </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.14117647059999999" green="0.14117647059999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
@@ -462,6 +469,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="i4k-28-3dr" id="FZ3-dg-KF4"/>
                         <outlet property="branchLinkTextField" destination="SOP-3u-nhT" id="H0r-W5-wGG"/>
+                        <outlet property="loginButton" destination="MPf-4A-Jiz" id="Lg1-nV-DiY"/>
                         <outlet property="pointsLabel" destination="ogr-eG-5aK" id="jdK-ZI-pmu"/>
                         <segue destination="BhN-zu-22N" kind="push" identifier="ShowCreditHistory" id="Blt-bB-ayh"/>
                         <segue destination="fQe-6g-cKp" kind="push" identifier="ShowLogOutput" id="0UI-6t-JlA"/>
@@ -469,7 +477,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vm9-Om-4Bg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2006" y="331"/>
+            <point key="canvasLocation" x="2005.5" y="330.5"/>
         </scene>
         <!--Credit History View Controller-->
         <scene sceneID="tDA-QN-vUY">

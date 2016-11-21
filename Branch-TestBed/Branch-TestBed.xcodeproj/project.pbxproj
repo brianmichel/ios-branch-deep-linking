@@ -89,6 +89,9 @@
 		46DC40801B2B84CD00D2D203 /* BranchShortUrlRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 46DC407F1B2B84CD00D2D203 /* BranchShortUrlRequestTests.m */; };
 		46FD92BA1AE7E8F80012E78F /* BNCSystemObserverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FD92B91AE7E8F80012E78F /* BNCSystemObserverTests.m */; };
 		46FFCF171ACC321A00039CE0 /* BNCEncodingUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FFCF161ACC321A00039CE0 /* BNCEncodingUtilsTests.m */; };
+		4D7958061DE3AA2500DA2B4E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7958051DE3AA2500DA2B4E /* FBSDKCoreKit.framework */; };
+		4D7958081DE3B0DA00DA2B4E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7958071DE3B0DA00DA2B4E /* Bolts.framework */; };
+		4D79580B1DE3B33700DA2B4E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D79580A1DE3B33700DA2B4E /* FBSDKLoginKit.framework */; };
 		4D8999EC1DC108FF00F7EE0A /* BNCXcode7Support.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D8999EA1DC108FF00F7EE0A /* BNCXcode7Support.h */; };
 		4D8999ED1DC108FF00F7EE0A /* BNCXcode7Support.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8999EB1DC108FF00F7EE0A /* BNCXcode7Support.m */; };
 		4DDC52621DCC08E700CFB737 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDC52611DCC08E700CFB737 /* iAd.framework */; };
@@ -205,6 +208,9 @@
 		46DC407F1B2B84CD00D2D203 /* BranchShortUrlRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BranchShortUrlRequestTests.m; sourceTree = "<group>"; };
 		46FD92B91AE7E8F80012E78F /* BNCSystemObserverTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCSystemObserverTests.m; sourceTree = "<group>"; };
 		46FFCF161ACC321A00039CE0 /* BNCEncodingUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCEncodingUtilsTests.m; sourceTree = "<group>"; };
+		4D7958051DE3AA2500DA2B4E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		4D7958071DE3B0DA00DA2B4E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		4D79580A1DE3B33700DA2B4E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		4D8999EA1DC108FF00F7EE0A /* BNCXcode7Support.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCXcode7Support.h; sourceTree = "<group>"; };
 		4D8999EB1DC108FF00F7EE0A /* BNCXcode7Support.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCXcode7Support.m; sourceTree = "<group>"; };
 		4DDC52611DCC08E700CFB737 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -313,6 +319,9 @@
 				46DC406E1B2A328900D2D203 /* AdSupport.framework in Frameworks */,
 				466B58811B1778DB00A69EDE /* libBranch.a in Frameworks */,
 				670016661940F51400A9E103 /* CoreGraphics.framework in Frameworks */,
+				4D7958081DE3B0DA00DA2B4E /* Bolts.framework in Frameworks */,
+				4D7958061DE3AA2500DA2B4E /* FBSDKCoreKit.framework in Frameworks */,
+				4D79580B1DE3B33700DA2B4E /* FBSDKLoginKit.framework in Frameworks */,
 				670016681940F51400A9E103 /* UIKit.framework in Frameworks */,
 				670016641940F51400A9E103 /* Foundation.framework in Frameworks */,
 			);
@@ -418,6 +427,9 @@
 		670016621940F51400A9E103 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4D7958071DE3B0DA00DA2B4E /* Bolts.framework */,
+				4D7958051DE3AA2500DA2B4E /* FBSDKCoreKit.framework */,
+				4D79580A1DE3B33700DA2B4E /* FBSDKLoginKit.framework */,
 				4DDC52611DCC08E700CFB737 /* iAd.framework */,
 				67F270881BA9FCFF002546A7 /* CoreSpotlight.framework */,
 				67163AAD1B9A036F007A8AB1 /* SafariServices.framework */,
@@ -1065,6 +1077,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = R63EM248DP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Branch-TestBed/Branch-TestBed-Prefix.pch";
 				INFOPLIST_FILE = "Branch-TestBed/Branch-TestBed-Info.plist";
@@ -1086,6 +1102,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = R63EM248DP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Branch-TestBed/Branch-TestBed-Prefix.pch";
 				INFOPLIST_FILE = "Branch-TestBed/Branch-TestBed-Info.plist";

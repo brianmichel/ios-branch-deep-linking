@@ -11,6 +11,9 @@
 #import "NavigationController.h"
 #import "ViewController.h"
 #import <SafariServices/SafariServices.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 
 @interface AppDelegate() <SFSafariViewControllerDelegate>
 @property (nonatomic, strong) SFSafariViewController *onboardingVC;
@@ -26,7 +29,31 @@
 
     Branch *branch = [Branch getInstance];
     //[branch setDebug];    eDebug.
-    
+
+    // Force this class to load (or the app will crash!):
+    Class c = NSClassFromString(@"FBSDKLoginButton");
+    if (!c) {
+        NSLog(@"Class did not load!");
+        FBSDKLoginButton *b = [[FBSDKLoginButton alloc] initWithFrame:CGRectZero];
+        NSLog(@"Button: %@.", b);
+    }
+
+    NSArray *facebookPermissions = @[ @"public_profile", @"email", @"user_friends" ];
+    FBSDKLoginManager *facebookLogin = [[FBSDKLoginManager alloc] init];
+    facebookLogin.loginBehavior = FBSDKLoginBehaviorNative;     //  FBSDKLoginBehaviorBrowser;
+    [facebookLogin logInWithReadPermissions:facebookPermissions
+        handler:^ (FBSDKLoginManagerLoginResult *result, NSError *error) {
+            NSString *message =
+                [NSString stringWithFormat:@"Result: %@\nError: %@", result, error];
+            UIAlertView *alert =
+                [[UIAlertView alloc]
+                    initWithTitle:@"Facebook Login"
+                    message:message delegate:nil
+                    cancelButtonTitle:@"OK"
+                    otherButtonTitles:nil];
+            [alert show];
+        }];
+
     // For Apple Search Ads
     // [branch delayInitToCheckForSearchAds];
     // [branch setAppleSearchAdsDebugMode];
@@ -106,9 +133,17 @@
     }
 }
 
+// Add to your AppDelegate.m file
+- (void)applicationDidBecomeActive:(UIApplication *)application {    
+    // Call the 'activateApp' method to log an app event for use
+    // in analytics and advertising reporting.
+    [FBSDKAppEvents activateApp];
+}
+
 - (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
     [[Branch getInstance] resumeInit];
 }
+
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     NSLog(@"application:openURL:sourceApplication:annotation: invoked with URL: %@", [url description]);

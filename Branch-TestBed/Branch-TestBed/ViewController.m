@@ -5,12 +5,17 @@
 //  Created by Alex Austin on 6/5/14.
 //  Copyright (c) 2014 Branch Metrics. All rights reserved.
 //
+
+
 #import "Branch.h"
 #import "ViewController.h"
 #import "CreditHistoryViewController.h"
 #import "LogOutputViewController.h"
 #import "BranchUniversalObject.h"
 #import "BranchLinkProperties.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 
 NSString *cononicalIdentifier = @"item/12345";
 NSString *canonicalUrl = @"https://dev.branch.io/getting-started/deep-link-routing/guide/ios/";
@@ -33,6 +38,7 @@ NSString *type = @"some type";
 @property (weak, nonatomic) IBOutlet UITextField *branchLinkTextField;
 @property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
 
 @property (strong, nonatomic) BranchUniversalObject *branchUniversalObject;
 
@@ -62,6 +68,8 @@ NSString *type = @"some type";
         value:[NSString stringWithFormat:
            @"This text was embedded as data in a Branch link with the following characteristics:\n\n  canonicalUrl: %@\n  title: %@\n  contentDescription: %@\n  imageUrl: %@\n", canonicalUrl, contentTitle, contentDescription, imageUrl]];
     [self refreshRewardPoints];
+    self.loginButton.readPermissions =
+        @[@"public_profile", @"email", @"user_friends"];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -70,6 +78,7 @@ NSString *type = @"some type";
 }
 
 - (IBAction)createBranchLinkButtonTouchUpInside:(id)sender {
+    [FBSDKAppEvents logEvent:@"createBranchLinkButtonTouchUpInside:"];
     BranchLinkProperties *linkProperties = [[BranchLinkProperties alloc] init];
     linkProperties.feature = feature;
     linkProperties.channel = channel;
