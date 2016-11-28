@@ -20,6 +20,8 @@
 #import "BranchActivityItemProvider.h"
 #import "BranchDeepLinkingController.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  `Branch` is the primary interface of the Branch iOS SDK. Currently, all interactions you will make are funneled through this class. It is not meant to be instantiated or subclassed, usage should be limited to the global instance.
  
@@ -549,7 +551,7 @@ typedef NS_ENUM(NSUInteger, BranchCreditHistoryOrder) {
  @warning This request is not removed from the queue upon failure -- it will be retried until it succeeds. The callback will only ever be called once, though.
  @warning You should call `logout` before calling `setIdentity:` a second time.
  */
-- (void)setIdentity:(NSString *)userId withCallback:(callbackWithParams)callback;
+- (void)setIdentity:(NSString *)userId withCallback:(callbackWithParams _Nullable)callback;
 
 /**
  Clear all of the current user's session items.
@@ -558,7 +560,7 @@ typedef NS_ENUM(NSUInteger, BranchCreditHistoryOrder) {
  */
 - (void)logout;
 
-- (void)logoutWithCallback:(callbackWithStatus)callback;
+- (void)logoutWithCallback:(callbackWithStatus _Nullable)callback;
 
 #pragma mark - Credit methods
 
@@ -588,7 +590,7 @@ typedef NS_ENUM(NSUInteger, BranchCreditHistoryOrder) {
  @param callback The callback that is called once the request has completed.
  @warning You must `loadRewardsWithCallback:` before calling `redeemRewards`.
  */
-- (void)redeemRewards:(NSInteger)count callback:(callbackWithStatus)callback;
+- (void)redeemRewards:(NSInteger)count callback:(callbackWithStatus _Nullable)callback;
 
 /**
  Redeem credits from the specified bucket.
@@ -607,7 +609,7 @@ typedef NS_ENUM(NSUInteger, BranchCreditHistoryOrder) {
  @param callback The callback that is called once the request has completed.
  @warning You must `loadRewardsWithCallback:` before calling `redeemRewards`.
  */
-- (void)redeemRewards:(NSInteger)count forBucket:(NSString *)bucket callback:(callbackWithStatus)callback;
+- (void)redeemRewards:(NSInteger)count forBucket:(NSString *)bucket callback:(callbackWithStatus _Nullable)callback;
 
 /**
  Get the local credit balance for the default bucket.
@@ -637,7 +639,7 @@ typedef NS_ENUM(NSUInteger, BranchCreditHistoryOrder) {
  @param bucket The bucket to get transaction history for.
  @param callback The callback to call with the list of transactions.
  */
-- (void)getCreditHistoryForBucket:(NSString *)bucket andCallback:(callbackWithList)callback;
+- (void)getCreditHistoryForBucket:(NSString * _Nullable)bucket andCallback:(callbackWithList)callback;
 
 /**
  Loads the last n credit transaction history items after the specified transaction ID for the default.
@@ -658,7 +660,7 @@ typedef NS_ENUM(NSUInteger, BranchCreditHistoryOrder) {
  @param order The direction to order transactions in the callback list. Least recent first means oldest items will be in the front of the response array, most recent means newest items will be front.
  @param callback The callback to call with the list of transactions.
  */
-- (void)getCreditHistoryForBucket:(NSString *)bucket after:(NSString *)creditTransactionId number:(NSInteger)length order:(BranchCreditHistoryOrder)order andCallback:(callbackWithList)callback;
+- (void)getCreditHistoryForBucket:(NSString * _Nullable)bucket after:(NSString * _Nullable)creditTransactionId number:(NSInteger)length order:(BranchCreditHistoryOrder)order andCallback:(callbackWithList)callback;
 
 #pragma mark - Action methods
 
@@ -688,7 +690,7 @@ typedef NS_ENUM(NSUInteger, BranchCreditHistoryOrder) {
  @param state The additional state items associated with the action.
  @param branchViewCallback Callback for Branch view state
  */
-- (void)userCompletedAction:(NSString *)action withState:(NSDictionary *)state withDelegate:(id)branchViewCallback;
+- (void)userCompletedAction:(NSString *)action withState:(NSDictionary * _Nullable)state withDelegate:(id _Nullable)branchViewCallback;
 
 #pragma mark - Short Url Sync methods
 
@@ -807,7 +809,7 @@ typedef NS_ENUM(NSUInteger, BranchCreditHistoryOrder) {
  @warning This method is primarily intended to be an internal Branch method, used to work around a bug with SLComposeViewController
  @warning This can fail if the alias is already taken.
  */
-- (NSString *)getShortURLWithParams:(NSDictionary *)params andTags:(NSArray *)tags andChannel:(NSString *)channel andFeature:(NSString *)feature andStage:(NSString *)stage andAlias:(NSString *)alias ignoreUAString:(NSString *)ignoreUAString;
+- (NSString *)getShortURLWithParams:(NSDictionary *)params andTags:(NSArray *)tags andChannel:(NSString *)channel andFeature:(NSString *)feature andStage:(NSString *)stage andAlias:(NSString *)alias ignoreUAString:(NSString * _Nullable)ignoreUAString;
 
 /**
  Get a short url with specified tags, params, channel, feature, stage and campaign. The usage type will default to unlimited.
@@ -825,7 +827,7 @@ typedef NS_ENUM(NSUInteger, BranchCreditHistoryOrder) {
  @warning This method is primarily intended to be an internal Branch method, used to work around a bug with SLComposeViewController
  @warning This can fail if the alias is already taken.
  */
-- (NSString *)getShortURLWithParams:(NSDictionary *)params andTags:(NSArray *)tags andChannel:(NSString *)channel andFeature:(NSString *)feature andStage:(NSString *)stage andCampaign:(NSString *)campaign andAlias:(NSString *)alias ignoreUAString:(NSString *)ignoreUAString forceLinkCreation:(BOOL)forceLinkCreation;
+- (NSString *)getShortURLWithParams:(NSDictionary *)params andTags:(NSArray *)tags andChannel:(NSString *)channel andFeature:(NSString *)feature andStage:(NSString *)stage andCampaign:(NSString *)campaign andAlias:(NSString *)alias ignoreUAString:(NSString * _Nullable)ignoreUAString forceLinkCreation:(BOOL)forceLinkCreation;
 
 /**
  Get a short url with specified tags, params, channel, feature, stage, and type.
@@ -946,7 +948,7 @@ typedef NS_ENUM(NSUInteger, BranchCreditHistoryOrder) {
  @param alias The alias for a link.
  @warning This can fail if the alias is already taken.
  */
-- (NSString *)getLongURLWithParams:(NSDictionary *)params andChannel:(NSString *)channel andTags:(NSArray *)tags andFeature:(NSString *)feature andStage:(NSString *)stage andAlias:(NSString *)alias;
+- (NSString *)getLongURLWithParams:(NSDictionary *)params andChannel:(NSString *_Nullable)channel andTags:(NSArray *)tags andFeature:(NSString *)feature andStage:(NSString *)stage andAlias:(NSString *)alias;
 
 #pragma mark - Short Url Async methods
 
@@ -1301,3 +1303,5 @@ typedef NS_ENUM(NSUInteger, BranchCreditHistoryOrder) {
 - (void)registerViewWithParams:(NSDictionary *)params andCallback:(callbackWithParams)callback;
 
 @end
+
+NS_ASSUME_NONNULL_END

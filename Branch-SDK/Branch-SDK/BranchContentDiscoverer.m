@@ -247,7 +247,8 @@ static NSInteger const CONTENT_DISCOVERY_INTERVAL = 5;
     if (!isClearText) {
         contentData = [BNCEncodingUtils md5Encode:contentData];
     }
-    [contentDataArray addObject:contentData];
+	if (contentData)
+    	[contentDataArray addObject:contentData];
 }
 
 - (NSString *)getContentText:(UIView *)view {
