@@ -27,6 +27,7 @@
     NSString * const CHANNEL = @"foo-channel";
     NSString * const FEATURE = @"foo-feature";
     NSString * const STAGE = @"foo-stage";
+    NSString * const CAMPAIGN = @"foo-campaign";
     NSDictionary * const PARAMS = @{};
     BNCLinkData * const LINK_DATA = [[BNCLinkData alloc] init];
     BNCLinkCache * const LINK_CACHE = [[BNCLinkCache alloc] init];
@@ -53,12 +54,30 @@
         BRANCH_REQUEST_KEY_URL_LINK_TYPE: @(LINK_TYPE),
         BRANCH_REQUEST_KEY_URL_SOURCE: @"ios",
         BRANCH_REQUEST_KEY_URL_STAGE: STAGE,
-        BRANCH_REQUEST_KEY_URL_TAGS: TAGS
+        BRANCH_REQUEST_KEY_URL_TAGS: TAGS,
+        BRANCH_REQUEST_KEY_URL_CAMPAIGN: CAMPAIGN
     };
     
-    BranchShortUrlSyncRequest *request = [[BranchShortUrlSyncRequest alloc] initWithTags:TAGS alias:ALIAS type:LINK_TYPE matchDuration:DURATION channel:CHANNEL feature:FEATURE stage:STAGE params:PARAMS linkData:LINK_DATA linkCache:LINK_CACHE];
+    BranchShortUrlSyncRequest *request =
+        [[BranchShortUrlSyncRequest alloc]
+            initWithTags:TAGS
+                   alias:ALIAS
+                    type:LINK_TYPE
+           matchDuration:DURATION
+                 channel:CHANNEL
+                 feature:FEATURE
+                   stage:STAGE
+                campaign:CAMPAIGN
+                  params:PARAMS
+                linkData:LINK_DATA
+               linkCache:LINK_CACHE];
+
     id serverInterfaceMock = OCMClassMock([BNCServerInterface class]);
-    [[serverInterfaceMock expect] postRequest:expectedParams url:[self stringMatchingPattern:BRANCH_REQUEST_ENDPOINT_GET_SHORT_URL] key:[OCMArg any] log:YES];
+    [[serverInterfaceMock expect]
+        postRequest:expectedParams
+        url:[self stringMatchingPattern:BRANCH_REQUEST_ENDPOINT_GET_SHORT_URL]
+        key:[OCMArg any]
+        log:YES];
     
     [request makeRequest:serverInterfaceMock key:nil];
     

@@ -34,9 +34,16 @@
 - (void)testScenario1 {
     id serverInterfaceMock = OCMClassMock([BNCServerInterface class]);
     
-    Branch *branch = [[Branch alloc] initWithInterface:serverInterfaceMock queue:[[BNCServerRequestQueue alloc] init] cache:[[BNCLinkCache alloc] init] preferenceHelper:[BNCPreferenceHelper preferenceHelper] key:@"key_live"];
+    Branch *branch =
+        [[Branch alloc]
+            initWithInterface:serverInterfaceMock
+            queue:[[BNCServerRequestQueue alloc] init]
+            cache:[[BNCLinkCache alloc] init]
+            preferenceHelper:[BNCPreferenceHelper preferenceHelper]
+            key:@"key_live"];
 
-    XCTestExpectation *scenario1Expectation1 = [self expectationWithDescription:@"Scenario1 Expectation1"];
+    XCTestExpectation *scenario1Expectation1 =
+        [self expectationWithDescription:@"Scenario1 Expectation1"];
 
     // Start off with a good connection
     [self initSessionExpectingSuccess:branch serverInterface:serverInterfaceMock callback:^{
@@ -167,7 +174,13 @@
 - (void)testScenario4 {
     id serverInterfaceMock = OCMClassMock([BNCServerInterface class]);
     
-    Branch *branch = [[Branch alloc] initWithInterface:serverInterfaceMock queue:[[BNCServerRequestQueue alloc] init] cache:[[BNCLinkCache alloc] init] preferenceHelper:[BNCPreferenceHelper preferenceHelper] key:@"key_foo"];
+    Branch *branch =
+        [[Branch alloc]
+            initWithInterface:serverInterfaceMock
+            queue:[[BNCServerRequestQueue alloc] init]
+            cache:[[BNCLinkCache alloc] init]
+            preferenceHelper:[BNCPreferenceHelper preferenceHelper]
+            key:@"key_foo"];
     
     XCTestExpectation *scenario4Expectation1 = [self expectationWithDescription:@"Scenario4 Expectation1"];
     
@@ -206,7 +219,6 @@
     [serverInterfaceMock verify];
 }
 
-
 #pragma mark - Scenario 5
 
 // Connection starts good -- InitSession completes
@@ -237,7 +249,6 @@
     [serverInterfaceMock verify];
 }
 
-
 #pragma mark - Scenario 6
 
 // Connection starts good -- InitSession completes
@@ -246,9 +257,16 @@
 - (void)testScenario6 {
     id serverInterfaceMock = OCMClassMock([BNCServerInterface class]);
     
-    Branch *branch = [[Branch alloc] initWithInterface:serverInterfaceMock queue:[[BNCServerRequestQueue alloc] init] cache:[[BNCLinkCache alloc] init] preferenceHelper:[BNCPreferenceHelper preferenceHelper] key:@"key_live"];
+    Branch *branch =
+        [[Branch alloc]
+            initWithInterface:serverInterfaceMock
+            queue:[[BNCServerRequestQueue alloc] init]
+            cache:[[BNCLinkCache alloc] init]
+            preferenceHelper:[BNCPreferenceHelper preferenceHelper]
+            key:@"key_live"];
     
-    XCTestExpectation *scenario6Expectation1 = [self expectationWithDescription:@"Scenario5 Expectation1"];
+    XCTestExpectation *scenario6Expectation1 =
+        [self expectationWithDescription:@"Scenario5 Expectation1"];
     
     // Start off with a good connection
     [self initSessionExpectingSuccess:branch serverInterface:serverInterfaceMock callback:^{
@@ -259,14 +277,15 @@
     [self resetExpectations];
     
     XCTestExpectation *scenario6Expectation2 = [self expectationWithDescription:@"Scenario5 Expectation2"];
-    [self enqueueTwoNonReplayableRequestsWithFirstFailingBecauseRequestIsBad:branch serverInterface:serverInterfaceMock callback:^{
-        [self safelyFulfillExpectation:scenario6Expectation2];
-    }];
+    [self enqueueTwoNonReplayableRequestsWithFirstFailingBecauseRequestIsBad:branch
+        serverInterface:serverInterfaceMock
+        callback:^{
+            [self safelyFulfillExpectation:scenario6Expectation2];
+        }];
     
     [self awaitExpectations];
     [serverInterfaceMock verify];
 }
-
 
 #pragma mark - Scenario 7
 
