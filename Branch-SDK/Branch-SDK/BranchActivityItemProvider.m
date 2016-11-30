@@ -77,28 +77,28 @@
 + (NSString *)humanReadableChannelWithActivityType:(NSString *)activityString {
     NSString *channel = activityString; //default
     NSDictionary *channelMappings = [[NSDictionary alloc] initWithObjectsAndKeys:
-        @"Pasteboard", UIActivityTypeCopyToPasteboard,
-        @"Email", UIActivityTypeMail,
-        @"SMS", UIActivityTypeMessage,
-        @"Facebook", UIActivityTypePostToFacebook,
-        @"Twitter", UIActivityTypePostToTwitter,
-        @"Weibo", UIActivityTypePostToWeibo,
-        @"Reading List", UIActivityTypeAddToReadingList,
-        @"Airdrop", UIActivityTypeAirDrop,
-        @"flickr", UIActivityTypePostToFlickr,
-        @"Tencent Weibo", UIActivityTypePostToTencentWeibo,
-        @"Vimeo", UIActivityTypePostToVimeo,
-        @"Apple Notes", @"com.apple.mobilenotes.SharingExtension",
-        @"Slack", @"com.tinyspeck.chatlyio.share",
-        @"WhatsApp", @"net.whatsapp.WhatsApp.ShareExtension",
-        @"WeChat", @"com.tencent.xin.sharetimeline",
-        @"LINE", @"jp.naver.line.Share",
-		@"Pinterest", @"pinterest.ShareExtension",
+        @"Pasteboard",      UIActivityTypeCopyToPasteboard,
+        @"Email",           UIActivityTypeMail,
+        @"SMS",             UIActivityTypeMessage,
+        @"Facebook",        UIActivityTypePostToFacebook,
+        @"Twitter",         UIActivityTypePostToTwitter,
+        @"Weibo",           UIActivityTypePostToWeibo,
+        @"Reading List",    UIActivityTypeAddToReadingList,
+        @"Airdrop",         UIActivityTypeAirDrop,
+        @"flickr",          UIActivityTypePostToFlickr,
+        @"Tencent Weibo",   UIActivityTypePostToTencentWeibo,
+        @"Vimeo",           UIActivityTypePostToVimeo,
+        @"Apple Notes",     @"com.apple.mobilenotes.SharingExtension",
+        @"Slack",           @"com.tinyspeck.chatlyio.share",
+        @"WhatsApp",        @"net.whatsapp.WhatsApp.ShareExtension",
+        @"WeChat",          @"com.tencent.xin.sharetimeline",
+        @"LINE",            @"jp.naver.line.Share",
+		@"Pinterest",       @"pinterest.ShareExtension",
 
         //  Keys for older app versions --
 
-        @"Facebook",    @"com.facebook.Facebook.ShareExtension",
-        @"Twitter",     @"com.atebits.Tweetie2.ShareExtension",
+        @"Facebook",        @"com.facebook.Facebook.ShareExtension",
+        @"Twitter",         @"com.atebits.Tweetie2.ShareExtension",
 
         nil
     ];

@@ -25,7 +25,7 @@
      */
 
     Branch *branch = [Branch getInstance];
-    [branch setDebug];
+    // [branch setDebug];   eDebug
     
     // For Apple Search Ads
     // [branch delayInitToCheckForSearchAds];
@@ -34,17 +34,16 @@
     [branch setWhiteListedSchemes:@[@"branchtest"]];
 
 
-    // Automatic Deeplinking on "deeplink_text"
-    NavigationController *navigationController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-    [branch registerDeepLinkController:navigationController forKey:@"deeplink_text"];
-    
+
     /**
      * // Optional. Use if presenting SFSafariViewController as part of onboarding. Cannot use with setDebug.
      * [self onboardUserOnInstall];
      */
 
     // Required. Initialize session. automaticallyDisplayDeepLinkController is optional (default is NO).
-    [branch initSessionWithLaunchOptions:launchOptions automaticallyDisplayDeepLinkController:YES deepLinkHandler:^(NSDictionary *params, NSError *error) {
+    [branch initSessionWithLaunchOptions:launchOptions
+        automaticallyDisplayDeepLinkController:YES
+        deepLinkHandler:^(NSDictionary *params, NSError *error) {
         if (!error) {
 
             NSLog(@"initSession succeeded with params: %@", params);
@@ -71,11 +70,18 @@
         }
     }];
 
+    // Automatic Deeplinking on "deeplink_text"
+    NavigationController *navigationController =
+        [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]]
+            instantiateInitialViewController];
+    [branch registerDeepLinkController:navigationController forKey:@"deeplink_text"];
+
     return YES;
 }
 
 - (void)onboardUserOnInstall {
-    NSURL *urlForOnboarding = [NSURL URLWithString:@"http://example.com"]; // Put your onboarding link here
+    // Put your onboarding link here
+    NSURL *urlForOnboarding = [NSURL URLWithString:@"http://example.com"];
     
     id notInstall = [[NSUserDefaults standardUserDefaults] objectForKey:@"notInstall"];
     if (!notInstall) {
