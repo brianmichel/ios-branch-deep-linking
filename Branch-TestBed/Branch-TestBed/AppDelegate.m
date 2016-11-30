@@ -33,7 +33,11 @@
 
     [branch setWhiteListedSchemes:@[@"branchtest"]];
 
-
+    // Automatic Deeplinking on "deeplink_text"
+    NavigationController *navigationController =
+        [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]]
+            instantiateInitialViewController];
+    [branch registerDeepLinkController:navigationController forKey:@"deeplink_text"];
 
     /**
      * // Optional. Use if presenting SFSafariViewController as part of onboarding. Cannot use with setDebug.
@@ -58,7 +62,9 @@
              LogOutputViewController *logOutputViewController = [storyboard instantiateViewControllerWithIdentifier:@"LogOutputViewController"];
              
              [navigationController pushViewController:logOutputViewController animated:YES];
-             NSString *logOutput = [NSString stringWithFormat:@"Successfully Deeplinked:\n\n%@\nSession Details:\n\n%@", deeplinkText, [[branch getLatestReferringParams] description]];
+             NSString *logOutput = 
+                [NSString stringWithFormat:@"Successfully Deeplinked:\n\n%@\nSession Details:\n\n%@", 
+                    deeplinkText, [[branch getLatestReferringParams] description]];
              logOutputViewController.logOutput = logOutput;
              
              } else {
@@ -69,12 +75,6 @@
             NSLog(@"Branch TestBed: Initialization failed\n%@", error.localizedDescription);
         }
     }];
-
-    // Automatic Deeplinking on "deeplink_text"
-    NavigationController *navigationController =
-        [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]]
-            instantiateInitialViewController];
-    [branch registerDeepLinkController:navigationController forKey:@"deeplink_text"];
 
     return YES;
 }
