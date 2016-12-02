@@ -25,7 +25,7 @@
      */
 
     Branch *branch = [Branch getInstance];
-    [branch setDebug];
+    // [branch setDebug];   //  Turn on debugging here. 
     
     // For Apple Search Ads
     // [branch delayInitToCheckForSearchAds];
@@ -33,9 +33,18 @@
 
     [branch setWhiteListedSchemes:@[@"branchtest"]];
 
-
     // Automatic Deeplinking on "deeplink_text"
-    NavigationController *navigationController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    NavigationController *navigationController =
+        [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]]
+            instantiateInitialViewController];
+#if 1
+    UIViewController *viewController =
+        [[UIStoryboard storyboardWithName:@"Main" bundle:NULL]
+            instantiateViewControllerWithIdentifier:@"ViewController"];
+    self.window.rootViewController = viewController;
+    [self.window makeKeyAndVisible];
+#endif
+
     [branch registerDeepLinkController:navigationController forKey:@"deeplink_text"];
     
     /**
@@ -44,7 +53,9 @@
      */
 
     // Required. Initialize session. automaticallyDisplayDeepLinkController is optional (default is NO).
-    [branch initSessionWithLaunchOptions:launchOptions automaticallyDisplayDeepLinkController:YES deepLinkHandler:^(NSDictionary *params, NSError *error) {
+    [branch initSessionWithLaunchOptions:launchOptions
+        automaticallyDisplayDeepLinkController:YES
+        deepLinkHandler:^(NSDictionary *params, NSError *error) {
         if (!error) {
 
             NSLog(@"initSession succeeded with params: %@", params);
