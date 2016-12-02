@@ -25,7 +25,8 @@
      */
 
     Branch *branch = [Branch getInstance];
-    // [branch setDebug];   //  Turn on debugging here. 
+    // Un-comment to turn debugging on:    
+    // [branch setDebug];
     
     // For Apple Search Ads
     // [branch delayInitToCheckForSearchAds];
@@ -37,7 +38,7 @@
     NavigationController *navigationController =
         [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]]
             instantiateInitialViewController];
-#if 1
+#if 0
     UIViewController *viewController =
         [[UIStoryboard storyboardWithName:@"Main" bundle:NULL]
             instantiateViewControllerWithIdentifier:@"ViewController"];
